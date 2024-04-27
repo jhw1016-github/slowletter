@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> 편지 서비스 화면</title>
+</head>
+<body>
+<div>
+    <h1><a th:href="|/${pageName}|">[[${pageName}]]</a></h1> <hr/>
+    <div>
+        <h3>편지 서비스</h3>
+        <button th:onclick="|location.href='@{/letter/send }'|">편지 쓰기</button> <br/><br/>
+    </div>
+
+    <!-- Buttons for Sent and Received Letters -->
+    <div>
+        <a th:onclick="|location.href='@{/letter/sendBox}'|"><button>보낸 편지함</button></a>
+        <a th:href="|location.href='@{/letter/receiveBox}'|"><button>받은 편지함</button></a>
+    </div>
+</div>
+</body>
+</html>

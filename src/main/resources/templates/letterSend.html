@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> 편지 작성 </title>
+</head>
+<body>
+<div>
+    <h1><a th:href="|/${pageName}|">[[${pageName}]]</a></h1> <hr/>
+    <h2>편지 작성</h2>
+    <form th:method="post" th:action="@{/letter/send}" th:object="${sendRequest}">
+        <div>
+            <label th:for="sender">보내는 이 : </label>
+            <input type="text" th:field="*{sender}" th:errorclass="error-input"/>
+        </div>
+        <br/>
+        <div>
+            <label th:for="receiver">받는 이 : </label>
+            <input type="text" th:field="*{receiver}" th:errorclass="error-input"/>
+        </div>
+        <br/>
+        <div>
+            <label th:for="message">편지 내용 : </label>
+            <input type="text" th:field="*{message}" th:errorclass="error-input"/>
+        </div>
+        <br/>
+        <button type="submit">편지 전송!</button>
+    </form>
+</div>
+</body>
+</html>
+
+<style>
+    .error-class {
+        color: red;
+    }
+    .error-input {
+        border-color: red;
+    }
+</style>
