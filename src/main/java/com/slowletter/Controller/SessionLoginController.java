@@ -132,18 +132,4 @@ public class SessionLoginController {
         return "info";
     }
 
-    @GetMapping("/admin")
-    public String adminPage(@SessionAttribute(name = "userId", required = false) Long userId, Model model) {
-        model.addAttribute("loginType", "session-login");
-        model.addAttribute("pageName", "세션 로그인");
-
-        UserEntity loginUser = userService.getLoginUserById(userId);
-
-        if(loginUser == null) {
-            return "redirect:/session-login/login";
-        }
-
-
-        return "admin";
-    }
 }

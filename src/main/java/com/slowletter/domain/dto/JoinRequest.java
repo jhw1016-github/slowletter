@@ -22,21 +22,19 @@ public class JoinRequest {
     @NotBlank(message = "닉네임이 비어있습니다.")
     private String nickname;
 
-    // 비밀번호 암호화 X
+    private String country;
+
+    private String interest;
+
     public UserEntity toEntity() {
         return UserEntity.builder()
                 .loginId(this.loginId)
                 .password(this.password)
                 .nickname(this.nickname)
+                .country(this.country)
+                .interest(this.interest)
                 .build();
     }
 
-    // 비밀번호 암호화
-    public UserEntity toEntity(String encodedPassword) {
-        return UserEntity.builder()
-                .loginId(this.loginId)
-                .password(encodedPassword)
-                .nickname(this.nickname)
-                .build();
-    }
+
 }

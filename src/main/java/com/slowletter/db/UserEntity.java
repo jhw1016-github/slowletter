@@ -26,5 +26,8 @@ public class UserEntity {
     private String password;
     private String nickname;
 
+    private String country;
+    private String interest;
+
 }
 

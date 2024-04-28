@@ -1,41 +1,73 @@
 <!DOCTYPE html>
 <html lang="ko">
-<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title> 편지 작성 </title>
+    <title>편지 작성</title>
 </head>
 <body>
 <div>
     <h1><a th:href="|/${pageName}|">[[${pageName}]]</a></h1> <hr/>
     <h2>편지 작성</h2>
-    <form th:method="post" th:action="@{/letter/send}" th:object="${sendRequest}">
+    <form th:method="post" th:action="@{/letter/send}" th:object="${sendRequest}" onsubmit="sendMessage(event)">
         <div>
-            <label th:for="sender">보내는 이 : </label>
-            <input type="text" th:field="*{sender}" th:errorclass="error-input"/>
+            <label for="sender">보내는 이: </label>
+            <input type="text" id="sender" th:field="*{sender}" class="error-input"/>
         </div>
         <br/>
         <div>
-            <label th:for="receiver">받는 이 : </label>
-            <input type="text" th:field="*{receiver}" th:errorclass="error-input"/>
+            <label for="receiver">받는 이: </label>
+            <input type="text" id="receiver" th:field="*{receiver}" class="error-input"/>
         </div>
         <br/>
         <div>
-            <label th:for="message">편지 내용 : </label>
-            <input type="text" th:field="*{message}" th:errorclass="error-input"/>
+            <label for="message">편지 내용: </label>
+            <input type="text" id="message" th:field="*{message}" class="error-input"/>
         </div>
         <br/>
-        <button type="submit">편지 전송!</button>
+        <button type="submit" id="sendButton">편지 전송!</button>
+        <button type="button" id="sendButton1">편지 전송socket!</button>
     </form>
 </div>
+<script>
+    document.getElementById("sendButton1").addEventListener("click", function() {
+
+        console.log("Function called."); // Debugging statement
+        const sender = document.getElementById("sender").value;
+        const receiver = document.getElementById("receiver").value;
+        const message = document.getElementById("message").value;
+
+
+        socket.onopen = function (event) {
+            console.log("WebSocket opened."); // Debugging statement
+
+            const data = {
+                sender: sender,
+                receiver: receiver,
+                message: message
+            };
+            socket.send(JSON.stringify(data));
+        };
+
+        socket.onerror = function (error) {
+            console.error("WebSocket error:", error);
+        };
+
+        socket.onmessage = function(event) {
+            // 서버로부터 받은 메시지를 파싱하여 객체로 변환
+            const receivedData = JSON.parse(event.data);
+
+            // 받은 데이터를 화면에 출력
+            console.log("Received message:", receivedData);
+            // 아래는 화면에 출력하는 대신, 원하는 방식으로 UI에 반영할 수 있습니다.
+            // 예를 들어, 받은 메시지를 HTML 요소에 추가하는 등의 작업을 수행할 수 있습니다.
+            // 예를 들어, 다음과 같이 작성할 수 있습니다:
+            // displayMessage(receivedData.sender, receivedData.receiver, receivedData.message);
+        };
+        socket.onclose = function (event) {
+            console.log("WebSocket closed."); // Debugging statement
+        };
+    });
+</script>
+
 </body>
 </html>
-
-<style>
-    .error-class {
-        color: red;
-    }
-    .error-input {
-        border-color: red;
-    }
-</style>

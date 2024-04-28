@@ -18,8 +18,9 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(webSocketHandler, "/letter/send").setAllowedOrigins("*");
+        registry.addHandler(webSocketHandler, "/session-login").setAllowedOrigins("*");
     }
+}
     //'/아무거나해요' 이부분은 나중에 서버 세팅을 끝난 후 실제로 테스트해볼때 정해지는 url 입니다.
     //
     //ex) ws://127.0.0.1:포트/아무거나해요
@@ -30,5 +31,3 @@ public class WebSocketConfig implements WebSocketConfigurer {
     //
     //현재 저희는 테스트이기때문에 * 와일드카드로 모든 도메인을 열어줍시다.(실제로 개발하실때에는 보안상의 위험으로 와일드카드는 쓰시면안됍니다.)
 
-
-}

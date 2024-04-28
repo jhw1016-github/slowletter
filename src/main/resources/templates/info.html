@@ -12,7 +12,38 @@
     <div>
         <div th:text="|loginId : ${user.loginId}|"/>
         <div th:text="|nickname : ${user.nickname}|"/>
+        <div th:text="|interest : ${user.interest}|"/>
+        <div th:text="|country : ${user.country}|"/>
+        <button type="button" id="sendButton">편지 전송!</button>
     </div>
 </div>
+<script>
+    document.getElementById("sendButton").addEventListener("click", function() {
+        console.log("Function called."); // Debugging statement
+        // const sender = document.getElementById("sender").value;
+        // const receiver = document.getElementById("receiver").value;
+        // const message = document.getElementById("message").value;
+
+        const socket = new WebSocket("ws://localhost:8080/session-login");
+
+        socket.onopen = function (event) {
+            console.log("WebSocket opened."); // Debugging statement
+
+            const data = {
+            };
+            socket.send(JSON.stringify(data));
+        };
+
+        socket.onerror = function (error) {
+            console.error("WebSocket error:", error);
+        };
+
+        socket.onclose = function (event) {
+            console.log("WebSocket closed."); // Debugging statement
+        };
+    });
+
+</script>
+
 </body>
 </html>

@@ -44,9 +44,6 @@ public class UserService {
      */
 
 
-
-
-
     public UserEntity login(LoginRequest req) {
         Optional<UserEntity> optionalUser = userRepository.findByLoginId(req.getLoginId());
 
@@ -78,13 +75,6 @@ public class UserService {
 
         return optionalUser.get();
     }
-
-    /**
-     * loginId(String)를 입력받아 User을 return 해주는 기능
-     * 인증, 인가 시 사용
-     * loginId가 null이거나(로그인 X) userId로 찾아온 User가 없으면 null return
-     * loginId로 찾아온 User가 존재하면 User return
-     */
     public UserEntity getLoginUserByLoginId(String loginId) {
         if(loginId == null) return null;
 
