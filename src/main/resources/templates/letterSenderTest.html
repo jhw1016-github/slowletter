@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <!--추가    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--추가    -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+    <!--추가    -->
+    <style>
+      :root {
+        --defaultwhite: rgba(255, 255, 255, 1);
+        --coolgray-10: rgba(242, 244, 248, 1);
+        --coolgray-60: rgba(105, 112, 119, 1);
+        --primary-60: rgba(15, 98, 254, 1);
+        --body-XS-font-family: "Roboto", Helvetica;
+        --body-XS-font-weight: 400;
+        --body-XS-font-size: 12px;
+        --body-XS-letter-spacing: 0px;
+        --body-XS-line-height: 139.9999976158142%;
+        --body-XS-font-style: normal;
+        --button-m-font-family: "Roboto", Helvetica;
+        --button-m-font-weight: 500;
+        --button-m-font-size: 16px;
+        --button-m-letter-spacing: 0.5px;
+        --button-m-line-height: 100%;
+        --button-m-font-style: normal;
+      }
+      /*<!-- root는 guide css파일 넣어줌*/
+
+      .screen {
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+      }
+      #notificationCount {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        background-color: cornflowerblue;
+        color: white;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+      }
+
+      .screen .overlap-wrapper {
+        background-color: #ffffff;
+        width: 1440px;
+        height: 1024px;
+      }
+
+      .screen .overlap {
+        position: relative;
+        height: 1024px;
+      }
+
+      .screen .desktop {
+        position: absolute;
+        width: 1440px;
+        height: 1024px;
+        top: 0;
+        left: 0;
+        background-color: #ffffff;
+      }
+
+      .screen .overlap-group {
+        position: absolute;
+        width: 237px;
+        height: 45px;
+        top: 52px;
+        left: 389px;
+      }
+
+      .screen .text-wrapper {
+        position: absolute;
+        width: 193px;
+        top: 1px;
+        left: 44px;
+        font-family: "Roboto-Medium", Helvetica;
+        font-weight: 500;
+        color: #000000;
+        font-size: 40px;
+        text-align: center;
+        letter-spacing: 0.5px;
+        line-height: 40px;
+        white-space: nowrap;
+      }
+
+      .screen .icon-feathericons {
+        position: absolute;
+        width: 45px;
+        height: 45px;
+        top: 0;
+        left: 0;
+      }
+
+      .screen .div {
+        position: absolute;
+        width: 203px;
+        top: 135px;
+        left: 387px;
+        font-family: "Roboto-Medium", Helvetica;
+        font-weight: 500;
+        color: #000000;
+        font-size: 24px;
+        text-align: center;
+        letter-spacing: 0.5px;
+        line-height: 24px;
+        white-space: nowrap;
+      }
+
+      .screen .overlap-2 {
+        position: absolute;
+        width: 134px;
+        height: 43px;
+        top: 182px;
+        left: 1162px;
+        background-color: #ffc7c7;
+        border-radius: 10px;
+      }
+
+      .screen .text-wrapper-2 {
+        position: absolute;
+        width: 95px;
+        top: 9px;
+        left: 1px;
+        font-family: "Roboto-SemiBold", Helvetica;
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 23px;
+        text-align: center;
+        letter-spacing: 0.5px;
+        line-height: 22px;
+        white-space: nowrap;
+      }
+
+      .screen .tempsave {
+        position: absolute;
+        width: 95px;
+        top: 12px;
+        left: 12px;
+        font-family: "Roboto-SemiBold", Helvetica;
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 23px;
+        text-align: center;
+        letter-spacing: 0.5px;
+        line-height: 22px;
+        white-space: nowrap;
+      }
+
+      .screen .icon-tabler-icons {
+        position: absolute;
+        width: 29px;
+        height: 29px;
+        top: 8px;
+        left: 91px;
+      }
+
+      .screen .div-wrapper {
+        position: absolute;
+        width: 121px;
+        height: 43px;
+        top: 182px;
+        left: 1019px;
+        background-color: #ffe2e2;
+        border-radius: 10px;
+      }
+
+      .screen .text-wrapper-3 {
+        position: absolute;
+        width: 95px;
+        top: 11px;
+        left: 13px;
+        font-family: "Roboto-SemiBold", Helvetica;
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 21px;
+        text-align: center;
+        letter-spacing: 0.5px;
+        line-height: 21px;
+        white-space: nowrap;
+      }
+
+      .screen .overlap-3 {
+        position: absolute;
+        width: 974px;
+        height: 761px;
+        top: 263px;
+        left: 364px;
+        background-color: #f6f6f6;
+      }
+
+      .screen .textField {
+        resize: none;
+        position: absolute;
+        left: 20px;
+        background-color: transparent;
+        border-color: transparent;
+        width: 730px;
+        height: 700px;
+        font-size: 20px;
+        line-height: 30px;
+      }
+
+      .screen hr {
+        align: left;
+        left: 20px;
+        width: 730px;
+      }
+
+      .screen .overlap-4 {
+        position: absolute;
+        width: 833px;
+        height: 322px;
+        top: 32px;
+        left: 89px;
+      }
+
+      .screen .line-3 {
+        top: 195px;
+        left: 0;
+        position: absolute;
+        width: 796px;
+        height: 1px;
+        background-image: url(./img/line-2-2.svg);
+        background-size: cover;
+        background-position: 50% 50%;
+      }
+
+      .screen .line-4 {
+        top: 144px;
+        left: 0;
+        position: absolute;
+        width: 796px;
+        height: 1px;
+        background-image: url(.//img/line-2-12.svg);
+        background-size: cover;
+        background-position: 50% 50%;
+      }
+
+      .screen .line-5 {
+        top: 246px;
+        left: 0;
+        position: absolute;
+        width: 796px;
+        height: 1px;
+        background-image: url(.//img/line-2.svg);
+        background-size: cover;
+        background-position: 50% 50%;
+      }
+
+      .screen .vector {
+        position: absolute;
+        width: 140px;
+        height: 188px;
+        top: 0;
+        left: 693px;
+      }
+
+      .screen .rectangle {
+        position: absolute;
+        width: 114px;
+        height: 165px;
+        top: 11px;
+        left: 706px;
+      }
+
+      .screen .stamp {
+        height: 169px;
+        top: 140px;
+        left: 595px;
+        position: absolute;
+        width: 181px;
+      }
+
+      .screen .img {
+        height: 170px;
+        top: 129px;
+        left: 596px;
+        position: absolute;
+        width: 181px;
+      }
+
+      .screen .stamp-2 {
+        height: 169px;
+        top: 119px;
+        left: 595px;
+        position: absolute;
+        width: 181px;
+      }
+
+      .screen .stamp-3 {
+        height: 170px;
+        top: 152px;
+        left: 596px;
+        position: absolute;
+        width: 181px;
+      }
+
+      .screen .stampcircle {
+        position: absolute;
+        width: 92px;
+        height: 93px;
+        top: 136px;
+        left: 666px;
+      }
+
+      .screen .stampcircle-2 {
+        position: absolute;
+        width: 169px;
+        height: 169px;
+        top: 112px;
+        left: 620px;
+      }
+
+      .screen .line-6 {
+        top: 431px;
+        left: 89px;
+        position: absolute;
+        width: 796px;
+        height: 1px;
+        background-image: url(.//img/line-2-8.svg);
+        background-size: cover;
+        background-position: 50% 50%;
+      }
+
+      .screen .line-7 {
+        top: 584px;
+        left: 89px;
+        position: absolute;
+        width: 796px;
+        height: 1px;
+        background-image: url(.//img/line-2-10.svg);
+        background-size: cover;
+        background-position: 50% 50%;
+      }
+
+      .screen .line-8 {
+        top: 380px;
+        left: 89px;
+        position: absolute;
+        width: 796px;
+        height: 1px;
+        background-image: url(.//img/line-2-11.svg);
+        background-size: cover;
+        background-position: 50% 50%;
+      }
+
+      .screen .line-9 {
+        top: 533px;
+        left: 89px;
+        position: absolute;
+        width: 796px;
+        height: 1px;
+        background-image: url(.//img/line-2-7.svg);
+        background-size: cover;
+        background-position: 50% 50%;
+      }
+
+      .screen .line-10 {
+        top: 482px;
+        left: 89px;
+        position: absolute;
+        width: 796px;
+        height: 1px;
+        background-image: url(.//img/line-2-9.svg);
+        background-size: cover;
+        background-position: 50% 50%;
+      }
+
+      .screen .line-11 {
+        top: 635px;
+        left: 89px;
+        position: absolute;
+        width: 796px;
+        height: 1px;
+        background-image: url(.//img/line-2-5.svg);
+        background-size: cover;
+        background-position: 50% 50%;
+      }
+
+      .screen .line-12 {
+        top: 686px;
+        left: 89px;
+        position: absolute;
+        width: 796px;
+        height: 1px;
+        background-image: url(.//img/line-2-6.svg);
+        background-size: cover;
+        background-position: 50% 50%;
+      }
+
+      .screen .overlap-group-2 {
+        position: absolute;
+        width: 255px;
+        height: 1024px;
+        top: 0;
+        left: 0;
+        border: 2px solid;
+        border-color: #d9d9d9;
+      }
+
+      .screen .small-icon {
+        line-height: 500px;
+      }
+      .screen .user-thumb {
+        display: flex;
+        width: 48px;
+        height: 48px;
+        align-items: center;
+        justify-content: space-around;
+        gap: 10px;
+        position: absolute;
+        top: 120px;
+        left: 37px;
+        background-color: var(--coolgray-10);
+        border-radius: 100px;
+      }
+
+      .screen .icon-jam-icons {
+        position: relative;
+        width: 24px;
+        height: 24px;
+      }
+
+      .screen .icon-jam-icons-4 {
+        position: relative;
+        width: 40px;
+        height: 40px;
+      }
+
+      .screen .button {
+        all: unset;
+        box-sizing: border-box;
+        display: inline-flex;
+        justify-content: center;
+        left: 98px;
+        height: 48px;
+        align-items: center;
+        padding: 20px 12px;
+        position: absolute;
+        top: 120px;
+      }
+
+      .screen .icon-jam-icons-2 {
+        position: relative;
+        width: 24px;
+        height: 24px;
+        margin-top: -4px;
+        margin-bottom: -4px;
+      }
+
+
+      .screen .button-2 {
+        all: unset;
+        box-sizing: border-box;
+        display: inline-flex;
+        justify-content: center;
+        gap: 16px;
+        left: 165px;
+        height: 48px;
+        align-items: center;
+        padding: 16px 12px;
+        position: absolute;
+        top: 120px;
+      }
+
+      .screen .text {
+        position: relative;
+        width: fit-content;
+        font-family: var(--body-XS-font-family);
+        font-weight: var(--body-XS-font-weight);
+        color: var(--defaultwhite);
+        font-size: var(--body-XS-font-size);
+        text-align: center;
+        letter-spacing: var(--body-XS-letter-spacing);
+        line-height: var(--body-XS-line-height);
+        white-space: nowrap;
+        font-style: var(--body-XS-font-style);
+      }
+
+      .screen .slow-letter-network {
+        position: absolute;
+        width: 224px;
+        top: 23px;
+        left: 13px;
+        font-family: "Roboto-Regular", Helvetica;
+        font-weight: 400;
+        color: #000000;
+        font-size: 26px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: 20px;
+      }
+
+      .screen .span {
+        font-family: "Roboto-Regular", Helvetica;
+        font-weight: 400;
+        color: #000000;
+        font-size: 26px;
+        letter-spacing: 0;
+        line-height: 36.4px;
+      }
+
+      .screen .text-wrapper-5 {
+        font-size: 20px;
+        line-height: 28px;
+      }
+
+
+
+      .screen .rectangle-2 {
+        position: absolute;
+        width: 225px;
+        height: 54px;
+        top: 0;
+        left: 0;
+        background-color: #ffffff;
+        border-bottom-width: 1.5px;
+        border-bottom-style: solid;
+        border-top-width: 1.5px;
+        border-top-style: solid;
+        border-color: #f2f4f8;
+      }
+
+      .screen .letter-rectangle {
+        position: absolute;
+        width: 225px;
+        height: 54px;
+        top: 0;
+        left: 0;
+        background-color: #f6f6f6;
+        border-bottom-width: 1.5px;
+        border-bottom-style: solid;
+        border-top-width: 1.5px;
+        border-top-style: solid;
+        border-color: #f2f4f8;
+      }
+
+      .screen .text-wrapper-6 {
+        position: absolute;
+        width: 142px;
+        top: 18px;
+        left: 68px;
+        font-family: "Roboto-Medium", Helvetica;
+        font-weight: 500;
+        color: #000000;
+        font-size: 15px;
+        letter-spacing: 0;
+        line-height: 15px;
+        white-space: nowrap;
+      }
+
+      .screen .img-2 {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        top: 15px;
+        left: 21px;
+      }
+
+
+      .screen .icon-ionicons {
+        position: absolute;
+        width: 29px;
+        height: 29px;
+        top: 9px;
+        left: 18px;
+      }
+
+      .screen .badge-2 {
+        top: 18px;
+        left: 173px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 0.5px 5.5px;
+        position: absolute;
+        background-color: #ffc7c7;
+        border-radius: 12px;
+      }
+      .screen .overlap-5 {
+        position: absolute;
+        width: 225px;
+        height: 54px;
+        top: 186px;
+        left: 15px;
+      }
+
+      .screen .overlap-6 {
+        position: absolute;
+        width: 225px;
+        height: 54px;
+        top: 450px;
+        left: 15px;
+      }
+
+      .screen .overlap-7 {
+        position: absolute;
+        width: 225px;
+        height: 54px;
+        top: 505px;
+        left: 15px;
+      }
+      .screen .overlap-8 {
+        position: absolute;
+        width: 225px;
+        height: 54px;
+        top: 240px;
+        left: 15px;
+      }
+      .screen .overlap-9 {
+        position: absolute;
+        width: 225px;
+        height: 54px;
+        top: 395px;
+        left: 15px;
+      }
+      .screen .overlap-12 {
+        position: absolute;
+        width: 225px;
+        height: 54px;
+        top: 295px;
+        left: 15px;
+      }
+      .screen .overlap-13 {
+        position: absolute;
+        width: 225px;
+        height: 54px;
+        top: 350px;
+        left: 15px;
+      }
+
+      .screen .icon-jam-icons-3 {
+        position: absolute;
+        top: 17px;
+        left: 21px;
+        width: 24px;
+        height: 24px;
+      }
+
+
+
+
+
+      .screen .rectangle-3 {
+        position: absolute;
+        width: 225px;
+        height: 54px;
+        top: 0;
+        left: 0;
+        background-color: #ffffff;
+      }
+
+      .screen .text-wrapper-7 {
+        position: absolute;
+        width: 142px;
+        top: 19px;
+        left: 70px;
+        font-family: "Roboto-Medium", Helvetica;
+        font-weight: 500;
+        color: #000000;
+        font-size: 15px;
+        letter-spacing: 0;
+        line-height: 15px;
+        white-space: nowrap;
+      }
+
+
+
+      .screen .icon-feathericons-2 {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        top: 13px;
+        left: 22px;
+      }
+
+      .screen .overlap-10 {
+        position: absolute;
+        width: 166px;
+        height: 43px;
+        top: 182px;
+        left: 385px;
+      }
+
+      .screen .rectangle-4 {
+        position: absolute;
+        width: 200px;
+        height: 43px;
+        top: 0;
+        left: 4px;
+        background-color: #f6f6f6;
+        border-radius: 10px;
+        z-index: 1;
+      }
+
+      .screen .text-wrapper-8 {
+        position: absolute;
+        width: 77px;
+        top: 12px;
+        left: 13px;
+        font-family: "Roboto-Medium", Helvetica;
+        font-weight: 500;
+        color: #000000;
+        font-size: 18px;
+        text-align: center;
+        letter-spacing: 0.5px;
+        line-height: 18px;
+        white-space: nowrap;
+        z-index: 2;
+      }
+
+      .screen .text-wrapper-9 {
+        position: absolute;
+        width: 68px;
+        top: 12px;
+        left: 72px;
+        font-family: "Roboto-Medium", Helvetica;
+        font-weight: 500;
+        color: #4b4545;
+        font-size: 18px;
+        text-align: center;
+        letter-spacing: 0.5px;
+        line-height: 18px;
+        white-space: nowrap;
+      }
+
+      .screen .icon-feathericons-3 {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        top: 9px;
+        left: 134px;
+      }
+
+      .screen .overlap-11 {
+        position: absolute;
+        width: 185px;
+        height: 43px;
+        top: 182px;
+        left: 610px;
+        background-color: #f6f6f6;
+        border-radius: 10px;
+        z-index: 1;
+      }
+
+
+      .screen .text-wrapper-10 {
+        position: absolute;
+        width: 77px;
+        top: 12px;
+        left: 8px;
+        font-family: "Roboto-Medium", Helvetica;
+        font-weight: 500;
+        color: #000000;
+        font-size: 18px;
+        text-align: center;
+        letter-spacing: 0.5px;
+        line-height: 18px;
+        white-space: nowrap;
+        z-index: 2;
+      }
+
+      .screen .icon-feathericons-4 {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        top: 9px;
+        left: 130px;
+      }
+
+      .screen .icon-feathericons-5 {
+        position: absolute;
+        width: 28px;
+        height: 28px;
+        top: 322px;
+        left: 439px;
+      }
+
+      .screen .selectCountry {
+        position: relative;
+        z-index: 3;
+        left: 62px;
+        top: 9px;
+      }
+
+      .screen .selectInter {
+        position: relative;
+        z-index: 3;
+        left: 80px;
+        top: 9px;
+      }
+
+    </style>
+    <!--추가    -->
+
+  </head>
+  <body>
+    <div class="screen">
+      <div class="overlap-wrapper">
+        <div class="overlap">
+          <div class="desktop">
+            <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="messageModalLabel">모달창 띄우기</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <!-- Dynamically change modal content based on receivedData.remainDelayTime -->
+                    <h3 id="notificationTitle">새로운 편지가 도착했습니다!</h3>
+                    <div id="notificationContent">
+                      <div id="messageSender"></div>
+                      <div id="messageReceiver"></div>
+                      <div id="messageContent"></div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="overlap-group">
+              <div class="text-wrapper">편지 쓰기</div>
+              <img class="icon-feathericons" src="/img/feather.png" />
+            </div>
+            <div class="div">누구에게 보낼까요?</div>
+            <!-- 여기서부터 보내는 부분 -->
+            <form
+              th:method="post"
+              th:action="@{/letter/send}"
+              th:object="${sendRequest}"
+            >
+              <div class="overlap-10">
+                <div class="rectangle-4"></div>
+                <div class="text-wrapper-8">
+                  <label for="sender">보내는 이 :</label>
+                  <input
+                    type="text"
+                    id="sender"
+                    th:field="*{sender}"
+                    class="error-input"
+                    size="5"
+                  />
+                </div>
+              </div>
+              <div class="overlap-11">
+                <div class="text-wrapper-10">
+                  <label for="receiver">받는 이: </label>
+                  <input
+                    type="text"
+                    id="receiver"
+                    th:field="*{receiver}"
+                    class="error-input"
+                    size="5"
+                  />
+                </div>
+              </div>
+
+              <div class="overlap-3">
+                <p>
+                  <textarea
+                    class="textField"
+                    placeholder="여기에 편지를 써주세요!"
+                    id="message"
+                    th:field="*{message}"
+                  ></textarea>
+                </p>
+                <div class="overlap-4">
+                  <img class="vector" src="/img/case.png" />
+                  <img class="rectangle" src="/img/rectangle-25.png" />
+                </div>
+              </div>
+              <div class="overlap-2">
+                <div class="text-wrapper-2">
+                  <button type="button" id="sendButton1">보내기</button>
+                </div>
+                <img class="icon-tabler-icons" src="/img/mail-forward.png" />
+              </div>
+            </form>
+            <!-- 여기까지 전송 -->
+            <div class="overlap-group-2">
+              <div class="small-icon">
+                <div class="user-thumb">
+                  <img class="icon-jam-icons" src="/img/user.png" />
+                </div>
+                <div class="button">
+                  <img class="icon-jam-icons-4" src="/img/cog.png" />
+                </div>
+                <div class="button-2" onclick="resetNotificationCount()">
+                  <a href ="/letter/alarm" >
+                    <img class="icon-jam-icons" src="/img/bell.png" alt="Notifications" />
+                    <span id="notificationCount">0</span>
+                  </a>
+                </div>
+              </div>
+              <p class="slow-letter-network">
+                <span class="span">Slow letter<br /></span>
+                <span class="text-wrapper-5">Network Programming</span>
+              </p>
+              <div class="overlap-5">
+                <a href="/session-login">
+                  <div class="rectangle-3">
+                    <div class="text-wrapper-6">홈</div>
+                  </div>
+                  <img class="img-2" src="/img/home.png" />
+                </a>
+              </div>
+              <div class="overlap-8">
+                <a href="/letter/send" >
+                  <div class="letter-rectangle">
+                    <div class="text-wrapper-7">편지 쓰기</div>
+                  </div>
+                  <img class="img-2" src="/img/feather.png" />
+                </a>
+              </div>
+              <div class="overlap-12">
+                <a href="/letter/sendrandom" >
+                  <div class="rectangle-2">
+                    <div class="text-wrapper-7">랜덤 쓰기</div>
+                  </div>
+                  <img class="img-2" src="/img/feather.png" />
+                </a>
+              </div>
+              <div class="overlap-13">
+                <a href="/letter/sendtome" >
+                  <div class="rectangle-2">
+                    <div class="text-wrapper-7">내게 쓰기</div>
+                  </div>
+                  <img class="img-2" src="/img/feather.png" />
+                </a>
+              </div>
+              <div class="overlap-9">
+                <a href="/letter/receiveBox">
+                  <div class="rectangle-2" >
+                    <div class="text-wrapper-6">받은 편지</div>
+                  </div>
+                  <img class="icon-feathericons-2" src="/img/mail-2.png" />
+                </a>
+              </div>
+              <div class="overlap-6">
+                <a href="/letter/sendBox" >
+                  <div class="rectangle-2">
+                    <div class="text-wrapper-6">보낸 편지</div>
+                  </div>
+                  <img
+                          class="icon-ionicons"
+                          src="/img/paper-plane-outline.png"
+                  />
+                </a>
+              </div>
+              <div class="overlap-7">
+                <a href="./friend.html">
+                  <div class="rectangle-2">
+                    <div class="text-wrapper-6">친구</div>
+                  </div>
+                  <img class="icon-jam-icons-3" src="/img/users.png" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        updateNotificationCount();
+        // Set interval to check for WebSocket connection requests every second
+        setInterval(checkWebSocketConnectionRequest, 1000);
+        // Attach event listener to the send button
+        document.getElementById("sendButton1").addEventListener("click", handleSendButtonClick);
+      });
+      function checkWebSocketConnectionRequest() {
+        $.get("http://localhost:8080/checkWebSocketConnectionRequest", function (data) {
+          console.log("탐색중입니다");
+          if (data.requestWebSocketConnection) {
+            openWebSocket();
+          }
+        });
+      }
+      function openWebSocket() {
+        const socket = new WebSocket("ws://localhost:8080/letter/sendSuccess");
+
+        socket.onopen = function (event) {
+          console.log("WebSocket opened.");
+          notifyWebSocketReady();
+        };
+
+        socket.onmessage = function (event) {
+          handleWebSocketMessage(event);
+        };
+
+        socket.onerror = function (error) {
+          console.error("WebSocket error:", error);
+        };
+
+        socket.onclose = function (event) {
+          console.log("WebSocket closed.");
+        };
+      }
+      function handleWebSocketMessage(event) {
+        const receivedData = JSON.parse(event.data);
+        // Show modal
+        $('#messageModal').modal('show');
+
+        // Fill modal with received data
+        let alarm = receivedData.remainDelayTime !== undefined ? 1 : 0;
+
+        const sendRequest = {
+          sender: receivedData.sender,
+          receiver: receivedData.receiver,
+          message: receivedData.message,
+          alarm: alarm,
+          delayTime: receivedData.delayTime,
+          sendDate: receivedData.sendDate
+        };
+
+        if (alarm) {
+          showAlert(receivedData, sendRequest);
+        } else {
+          showMessage(receivedData, sendRequest);
+        }
+      }
+      function showAlert(receivedData, sendRequest) {
+        $('#notificationTitle').text('편지 알림');
+        $('#messageSender').text('Sender: ' + receivedData.sender);
+        $('#messageReceiver').text('Receiver: ' + receivedData.receiver);
+        $('#notificationContent').text(receivedData.remainDelayTime + 'ms 뒤에 편지가 도착합니다!!!');
+        saveMessage(sendRequest);
+      }
+
+      // Function to show message in modal
+      function showMessage(receivedData, sendRequest) {
+        $('#notificationTitle').text('편지 도착');
+        $('#notificationContent').html('<div id="messageSender"></div><div id="messageReceiver"></div><div id="messageContent"></div>');
+        $('#messageSender').text('Sender: ' + receivedData.sender);
+        $('#messageReceiver').text('Receiver: ' + receivedData.receiver);
+        $('#messageContent').text('Message: ' + receivedData.message);
+        saveMessage(sendRequest);
+      }
+      function saveMessage(sendRequest) {
+        $.ajax({
+          type: "POST",
+          url: "/letter2/receiveSuccess",
+          data: JSON.stringify(sendRequest),
+          contentType: "application/json",
+          success: function (response) {
+            console.log("Message saved successfully:", response);
+            updateNotificationCount();
+          },
+          error: function (xhr, status, error) {
+            console.error("Error saving message:", error);
+          }
+        });
+      }
+      function notifyWebSocketReady() {
+        $.post("/session-login/websocket-ready", function (response) {
+          console.log(response);
+        }).fail(function () {
+          console.error("Failed to notify WebSocket readiness.");
+        });
+      }
+
+      // Function to update notification count
+      function updateNotificationCount() {
+        $.get("/letter/notificationCount", function (data) {
+          const notificationCountElement = $("#notificationCount").text(data.count);
+          if (data.count > 0) {
+            notificationCountElement.show();
+          } else {
+            notificationCountElement.hide();
+          }
+        });
+      }
+      function handleSendButtonClick(){
+        const socket = new WebSocket(
+                "ws://localhost:8080/letter/sendSuccess"
+        );
+        console.log("Function called."); // Debugging statement
+        const sender = document.getElementById("sender").value;
+        const receiver = document.getElementById("receiver").value;
+        const message = document.getElementById("message").value;
+        const sendDate=new Date();
+
+        socket.onopen = function (event) {
+          console.log("WebSocket opened."); // Debugging statement
+          const data = {
+            sender: sender,
+            receiver: receiver,
+            message: message,
+            sendDate : sendDate
+          };
+          socket.send(JSON.stringify(data));
+        };
+
+        socket.onerror = function (error) {
+          console.error("WebSocket error:", error);
+        };
+
+        socket.onmessage = function (event) {
+          handleWebSocketMessage(event);
+
+        }
+        socket.onclose = function (event) {
+          console.log("WebSocket closed."); // Debugging statement
+        };
+
+      }
+    </script>
+
+
+
+
+
+  </body>
+</html>

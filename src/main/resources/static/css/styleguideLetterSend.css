@@ -1,0 +1,18 @@
+:root {
+  --defaultwhite: rgba(255, 255, 255, 1);
+  --coolgray-10: rgba(242, 244, 248, 1);
+  --coolgray-60: rgba(105, 112, 119, 1);
+  --primary-60: rgba(15, 98, 254, 1);
+  --body-XS-font-family: "Roboto", Helvetica;
+  --body-XS-font-weight: 400;
+  --body-XS-font-size: 12px;
+  --body-XS-letter-spacing: 0px;
+  --body-XS-line-height: 139.9999976158142%;
+  --body-XS-font-style: normal;
+  --button-m-font-family: "Roboto", Helvetica;
+  --button-m-font-weight: 500;
+  --button-m-font-size: 16px;
+  --button-m-letter-spacing: 0.5px;
+  --button-m-line-height: 100%;
+  --button-m-font-style: normal;
+}

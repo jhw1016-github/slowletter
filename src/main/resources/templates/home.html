@@ -7,6 +7,24 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title th:text="|${pageName}|"></title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        #notificationIcon {
+            position: relative;
+            display: inline-block;
+        }
+        #notificationCount {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+    </style>
 </head>
 <body>
 <div>
@@ -21,8 +39,186 @@
         <button th:onclick="|location.href='@{/{loginType}/info (loginType=${loginType})}'|">유저 정보</button> <br/><br/>
         <button th:onclick="|location.href='@{/{loginType}/logout (loginType=${loginType})}'|">로그아웃</button>
         <button th:onclick="|location.href='@{/letter}'|">편지 서비스</button>
+    </div>
+<!--    <div id="notificationIcon" onclick="resetNotificationCount()">-->
+<!--        <img src="/img/bell.png" alt="Notifications">-->
+<!--        <span id="notificationCount">0</span>-->
+<!--    </div>-->
+</div>
 
+<!-- Include Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!--<script>
+    let notificationCount = 0;
+    //function updateNotificationCount() {
+        const notificationCountElement = $("#notificationCount");
+        if (notificationCount > -1) {
+            notificationCountElement.text(notificationCount);
+            notificationCountElement.show();
+        } else {
+            notificationCountElement.hide();
+        }
+    }
+
+    //function resetNotificationCount() {
+        notificationCount = 0;
+        updateNotificationCount();
+    }
+
+    //function notifyWebSocketReady() {
+        $.post("/session-login/websocket-ready", function(response) {
+            console.log(response);
+        }).fail(function() {
+            console.error("Failed to notify WebSocket readiness.");
+        });
+    }
+
+    setInterval(function() {
+        // Send an AJAX request to the server to check if the attribute is set
+        $.get("http://localhost:8080/checkWebSocketConnectionRequest", function(data) {
+            console.log("탐색중입니다")
+            // If the attribute is set, initiate WebSocket connection
+            if (data.requestWebSocketConnection) {
+                // Initiate WebSocket connection logic here
+                const socket = new WebSocket("ws://localhost:8080/letter/sendSuccess");
+
+                socket.onopen = function (event) {
+                    console.log("WebSocket opened."); // Debugging statement
+                    notifyWebSocketReady();
+                };
+
+                socket.onmessage = function(event) {
+                    // 서버로부터 받은 메시지를 파싱하여 객체로 변환
+                    const receivedData = JSON.parse(event.data);
+                    console.log("Received message:", receivedData);
+
+                    // Show modal
+                    $('#messageModal').modal('show');
+
+                    // Fill modal with received data
+                    //remainDelayTime가 null이 아니면 알림이고 null이면 편지이다.
+                    let alarm = 0;
+                    if (receivedData.remainDelayTime !== undefined) {
+                        alarm = 1;
+                    }
+
+                    const sendRequest = {
+                        sender: receivedData.sender,
+                        receiver: receivedData.receiver,
+                        message: receivedData.message,
+                        alarm: alarm,
+                        delayTime : receivedData.delayTime
+
+                    };
+                    if (receivedData.remainDelayTime !== undefined) {
+                        $('#notificationTitle').text('편지 알림');
+                        $('#messageSender').text('Sender: ' + receivedData.sender);
+                        $('#messageReceiver').text('Receiver: ' + receivedData.receiver);
+                        $('#notificationContent').text(receivedData.remainDelayTime+'ms 뒤에 편지가 도착합니다!!!' );
+                        $.ajax({
+                            type: "POST",
+                            url: "/letter2/receiveSuccess",
+                            data: JSON.stringify(sendRequest),
+                            contentType: "application/json",
+                            success: function(response) {
+                                console.log("Message saved successfully:", response);
+                                notificationCount++;
+                                console.log(notificationCount);
+
+                                updateNotificationCount();
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("Error saving message:", error);
+                            }
+                        });
+
+
+                    } else {
+                        $('#notificationTitle').text('편지 도착');
+                        $('#notificationContent').html('<div id="messageSender"></div><div id="messageReceiver"></div><div id="messageContent"></div>');
+                        $('#messageSender').text('Sender: ' + receivedData.sender);
+                        $('#messageReceiver').text('Receiver: ' + receivedData.receiver);
+                        $('#messageContent').text('Message: ' + receivedData.message);
+
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/letter2/receiveSuccess",
+                            data: JSON.stringify(sendRequest),
+                            contentType: "application/json",
+                            success: function(response) {
+                                console.log("Message saved successfully:", response);
+                                notificationCount++;
+                                console.log(notificationCount);
+
+                                updateNotificationCount();
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("Error saving message:", error);
+                            }
+                        });
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+                    // if (receivedData.remainDelayTime !== null) { //remainDelayTime이 null이 아니면 알림이다.
+                    //     $('#remainDelayTime').text( receivedData.remainDelayTime + 'ms'+'시간 만큼후에 전달됩니다!');
+                    // }
+                    // else { //null이면 알림이 아닌 편지 전송이 되는거라서 db에 저장하는거임.
+                    //     // Send message to server to save in database
+                    //
+                    //
+                    // }
+
+
+
+
+
+
+
+                };
+            }
+        });
+    }, 1000); // Check every 5 seconds
+</script>
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="messageModalLabel">모달창 띄우기</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Dynamically change modal content based on receivedData.remainDelayTime -->
+                <h3 id="notificationTitle">새로운 편지가 도착했습니다!</h3>
+                <div id="notificationContent">
+                    <div id="messageSender"></div>
+                    <div id="messageReceiver"></div>
+                    <div id="messageContent"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
     </div>
 </div>
+
+
 </body>
 </html>

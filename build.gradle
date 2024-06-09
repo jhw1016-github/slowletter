@@ -25,7 +25,10 @@ dependencies {
 	//web-socket
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'javax.validation:validation-api:2.0.1.Final'
+
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	compileOnly 'org.projectlombok:lombok'

@@ -1,0 +1,251 @@
+.log-in {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.log-in .frame {
+  display: inline-flex;
+  height: 583px;
+  align-items: flex-start;
+  gap: 10px;
+  position: relative;
+  top: 230px;
+}
+
+.log-in .group {
+  position: relative;
+  width: 419.78px;
+  height: 600px;
+  margin-bottom: -17px;
+  margin-right: -4px;
+}
+
+.log-in .div-wrapper {
+  display: flex;
+  width: 169px;
+  height: 55px;
+  align-items: flex-start;
+  gap: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.log-in .text-wrapper {
+  position: relative;
+  width: fit-content;
+  margin-top: -1px;
+  font-family: "Poppins-Medium", Helvetica;
+  font-weight: 500;
+  color: #000000;
+  font-size: 32px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.log-in .div {
+  position: absolute;
+  width: 383px;
+  top: 55px;
+  left: 0;
+  font-family: "Poppins-Medium", Helvetica;
+  font-weight: 500;
+  color: #000000;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.log-in .frame-2 {
+  display: flex;
+  flex-direction: column;
+  width: 416px;
+  height: 60px;
+  align-items: flex-start;
+  position: absolute;
+  top: 143px;
+  left: 0;
+}
+
+.log-in .name-wrapper {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.log-in .name {
+  position: relative;
+  width: fit-content;
+  margin-top: -1px;
+  font-family: "Poppins-Medium", Helvetica;
+  font-weight: 500;
+  color: #000000;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.log-in .frame-3 {
+  display: flex;
+  width: 404px;
+  height: 32px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0px 10px 10px;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid;
+  border-color: #d9d9d9;
+}
+
+.log-in .input {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  flex: 0 0 auto;
+  margin-top: -1px;
+  margin-bottom: -1.5px;
+  border: none;
+  background: none;
+  font-family: "Poppins-Medium", Helvetica;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0;
+  line-height: normal;
+  padding: 0;
+}
+
+.log-in .overlap {
+  position: absolute;
+  width: 416px;
+  height: 60px;
+  top: 224px;
+  left: 0;
+}
+
+.log-in .text-wrapper-2 {
+  position: relative;
+  width: fit-content;
+  margin-top: -1px;
+  font-family: "Poppins-Medium", Helvetica;
+  font-weight: 500;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.log-in .text-wrapper-3 {
+  position: absolute;
+  width: 85px;
+  top: 0;
+  left: 350px;
+  font-family: "Poppins-Medium", Helvetica;
+  font-weight: 500;
+  color: var(--action-sec);
+  font-size: 10px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.log-in .group-2 {
+  position: absolute;
+  width: 124px;
+  height: 16px;
+  top: 305px;
+  left: -15px;
+}
+
+.log-in .isChecked {
+  position: absolute;
+  width: 150px;
+  top: 0;
+  left: 15px;
+  font-family: "Poppins-Medium", Helvetica;
+  font-weight: 500;
+  color: #000000;
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.log-in .group-3 {
+  position: absolute;
+  width: 238px;
+  height: 24px;
+  top: 576px;
+  left: 96px;
+}
+
+.log-in .p {
+  position: absolute;
+  width: 236px;
+  top: 0;
+  left: 0;
+  font-family: "Poppins-Medium", Helvetica;
+  font-weight: 500;
+  color: #000000;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.log-in .span {
+  font-family: "Poppins-Medium", Helvetica;
+  font-weight: 500;
+  color: #000000;
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+.log-in .text-wrapper-5 {
+  text-decoration: underline;
+}
+
+.log-in .overlap-group-wrapper {
+  position: absolute;
+  width: 416px;
+  height: 36px;
+  top: 342px;
+  left: 0;
+}
+
+.log-in .overlap-group {
+  position: relative;
+  width: 404px;
+  height: 32px;
+}
+
+.log-in .frame-7 {
+  display: flex;
+  width: 404px;
+  height: 32px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0px 10px 10px;
+  position: relative;
+  background-color: #ffc7c7;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid;
+}
+
+.log-in .loginButtonText {
+  position: absolute;
+  top: 20px;
+  left: 185px;
+  font-family: "Poppins-Bold", Helvetica;
+  font-weight: 700;
+  color: #000000;
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: normal;
+}

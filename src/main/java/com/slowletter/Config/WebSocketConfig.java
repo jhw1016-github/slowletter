@@ -1,7 +1,10 @@
 package com.slowletter.Config;
 
+import com.slowletter.Handler.HttpHandshakeInterceptor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.socket.WebSocketHandler;//추가
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
@@ -12,13 +15,17 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 //어떤 요청에 대한 어떤 응답을 할것인지에 대한 정의를 결정합니다.
 @Configuration
 @EnableWebSocket
+@EnableScheduling
 @RequiredArgsConstructor
 public class WebSocketConfig implements WebSocketConfigurer {
     private final WebSocketHandler webSocketHandler;
 
+    @Autowired
+    private HttpHandshakeInterceptor httpHandshakeInterceptor;
+
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(webSocketHandler, "/session-login").setAllowedOrigins("*");
+        registry.addHandler(webSocketHandler, "/letter/sendSuccess").addInterceptors(httpHandshakeInterceptor).setAllowedOrigins("*");
     }
 }
     //'/아무거나해요' 이부분은 나중에 서버 세팅을 끝난 후 실제로 테스트해볼때 정해지는 url 입니다.

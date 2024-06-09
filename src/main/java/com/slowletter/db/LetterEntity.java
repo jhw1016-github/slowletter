@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 
@@ -24,7 +21,14 @@ public class LetterEntity {
     private String sender;
     private String receiver;
     private String message;
-    private String topic;
+
+    private int delayTime;
+
+    private int alarm; //이게 0이면 편지이고 1이면 알림.
+    private String interest;
     private Date sendDate;
     private Date receiveDate;
-}
+
+
+    @Column(name = "`read`")
+    private Boolean read = false;}

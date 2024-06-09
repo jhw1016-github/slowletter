@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      :root {
+        --muted: rgba(217, 217, 217, 1);
+        --action-sec: rgba(12, 42, 146, 1);
+        --edf-2f-7: rgba(237, 242, 247, 1);
+      }
+
+      .log-in {
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .log-in .frame {
+        display: inline-flex;
+        height: 583px;
+        align-items: flex-start;
+        gap: 10px;
+        position: relative;
+        top: 230px;
+      }
+
+      .log-in .group {
+        position: relative;
+        width: 419.78px;
+        height: 600px;
+        margin-bottom: -17px;
+        margin-right: -4px;
+      }
+
+      .log-in .div-wrapper {
+        display: flex;
+        width: 169px;
+        height: 55px;
+        align-items: flex-start;
+        gap: 10px;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .log-in .text-wrapper {
+        position: relative;
+        width: fit-content;
+        margin-top: -1px;
+        font-family: "Poppins-Medium", Helvetica;
+        font-weight: 500;
+        color: #000000;
+        font-size: 32px;
+        letter-spacing: 0;
+        line-height: normal;
+      }
+
+      .log-in .div {
+        position: absolute;
+        width: 383px;
+        top: 55px;
+        left: 0;
+        font-family: "Poppins-Medium", Helvetica;
+        font-weight: 500;
+        color: #000000;
+        font-size: 16px;
+        letter-spacing: 0;
+        line-height: normal;
+      }
+
+      .log-in .frame-2 {
+        display: flex;
+        flex-direction: column;
+        width: 416px;
+        height: 60px;
+        align-items: flex-start;
+        position: absolute;
+        top: 143px;
+        left: 0;
+      }
+
+      .log-in .name-wrapper {
+        display: inline-flex;
+        align-items: flex-start;
+        gap: 10px;
+        position: relative;
+        flex: 0 0 auto;
+      }
+
+      .log-in .name {
+        position: relative;
+        width: fit-content;
+        margin-top: -1px;
+        font-family: "Poppins-Medium", Helvetica;
+        font-weight: 500;
+        color: #000000;
+        font-size: 14px;
+        letter-spacing: 0;
+        line-height: normal;
+      }
+
+      .log-in .frame-3 {
+        display: flex;
+        width: 404px;
+        height: 32px;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0px 10px 10px;
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid;
+        border-color: #d9d9d9;
+      }
+
+      .log-in .input {
+        display: inline-flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 10px;
+        position: relative;
+        flex: 0 0 auto;
+        margin-top: -1px;
+        margin-bottom: -1.5px;
+        border: none;
+        background: none;
+        font-family: "Poppins-Medium", Helvetica;
+        font-weight: 500;
+        font-size: 15px;
+        letter-spacing: 0;
+        line-height: normal;
+        padding: 0;
+      }
+
+      .log-in .overlap {
+        position: absolute;
+        width: 416px;
+        height: 60px;
+        top: 224px;
+        left: 0;
+      }
+
+      .log-in .text-wrapper-2 {
+        position: relative;
+        width: fit-content;
+        margin-top: -1px;
+        font-family: "Poppins-Medium", Helvetica;
+        font-weight: 500;
+        color: var(--muted);
+        font-size: 10px;
+        letter-spacing: 0;
+        line-height: normal;
+      }
+
+      .log-in .text-wrapper-3 {
+        position: absolute;
+        width: 85px;
+        top: 0;
+        left: 350px;
+        font-family: "Poppins-Medium", Helvetica;
+        font-weight: 500;
+        color: var(--action-sec);
+        font-size: 10px;
+        letter-spacing: 0;
+        line-height: normal;
+      }
+
+      .log-in .group-2 {
+        position: absolute;
+        width: 124px;
+        height: 16px;
+        top: 305px;
+        left: -15px;
+      }
+
+      .log-in .isChecked {
+        position: absolute;
+        width: 150px;
+        top: 0;
+        left: 15px;
+        font-family: "Poppins-Medium", Helvetica;
+        font-weight: 500;
+        color: #000000;
+        font-size: 12px;
+        letter-spacing: 0;
+        line-height: normal;
+      }
+
+      .log-in .group-3 {
+        position: absolute;
+        width: 238px;
+        height: 24px;
+        top: 500px;
+        left: 96px;
+      }
+
+      .log-in .p {
+        position: absolute;
+        width: 236px;
+        top: 0;
+        left: 0;
+        font-family: "Poppins-Medium", Helvetica;
+        font-weight: 500;
+        color: #000000;
+        font-size: 14px;
+        letter-spacing: 0;
+        line-height: normal;
+      }
+
+      .log-in .span {
+        font-family: "Poppins-Medium", Helvetica;
+        font-weight: 500;
+        color: #000000;
+        font-size: 14px;
+        letter-spacing: 0;
+      }
+
+      .log-in .text-wrapper-5 {
+        text-decoration: underline;
+      }
+
+      .log-in .overlap-group-wrapper {
+        position: absolute;
+        width: 416px;
+        height: 36px;
+        top: 342px;
+        left: 0;
+      }
+
+      .log-in .overlap-group {
+        position: relative;
+        width: 404px;
+        height: 32px;
+      }
+
+      .log-in .frame-7 {
+        display: flex;
+        width: 404px;
+        height: 32px;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0px 10px 10px;
+        position: relative;
+        background-color: #ffc7c7;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid;
+      }
+
+      .log-in .loginButtonText {
+        position: absolute;
+        top: 20px;
+        left: 185px;
+        font-family: "Poppins-Bold", Helvetica;
+        font-weight: 700;
+        color: #000000;
+        font-size: 13px;
+        letter-spacing: 0;
+        line-height: normal;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="log-in">
+      <div class="frame">
+        <div class="group">
+          <div class="div-wrapper">
+            <div class="text-wrapper">환영합니다!</div>
+          </div>
+          <p class="div">ID와 비밀번호를 입력해주세요.</p>
+          <!-- 여기서부터가 입력부분 -->
+          <form
+            th:method="post"
+            th:action="|@{/{loginType}/login (loginType=${loginType})}|"
+            th:object="${loginRequest}"
+          >
+            <div class="frame-2">
+              <div class="name-wrapper"><div class="name">아이디</div></div>
+              <div class="frame-3">
+                <label th:for="loginId"></label>
+                <input
+                  class="input"
+                  type="text"
+                  th:field="*{loginId}"
+                  placeholder="아이디를 입력하세요."
+                />
+              </div>
+            </div>
+            <div class="overlap">
+              <div class="name-wrapper"><div class="name">비밀번호</div></div>
+              <div class="frame-3">
+                <label th:for="password"></label>
+                <input
+                  class="input"
+                  type="password"
+                  th:field="*{password}"
+                  placeholder="비밀번호를 입력하세요."
+                />
+              </div>
+              <div class="text-wrapper-3">비밀번호 찾기</div>
+            </div>
+            <div class="group-2">
+              <label class="isChecked"
+                ><input
+                  type="checkbox"
+                  name="rmb"
+                  value="yes"
+                  checked
+                />Remember for 30 days</label
+              >
+            </div>
+            <div th:if="${#fields.hasGlobalErrors()}">
+              <br />
+              <div
+                class="error-class"
+                th:each="error : ${#fields.globalErrors()}"
+                th:text="${error}"
+              />
+            </div>
+            <div class="overlap-group-wrapper">
+              <div class="overlap-group">
+                <div class="frame-7"></div>
+                <div class="loginButtonText">
+                  <button type="submit" id="loginButton" class="input">
+                    로그인
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 여기는 회원가입창으로 이동 -->
+            <div class="group-3">
+              <p class="p">
+                <span class="span">계정이 없으신가요?&nbsp;&nbsp;&nbsp;</span>
+                <button
+                  type="button"
+                  th:onclick="|location.href='@{/session-login/join}'|"
+                >
+                  회원 가입
+                </button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

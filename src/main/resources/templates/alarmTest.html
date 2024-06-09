@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>alarm Box</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .unread {
+      background-color: #f0f0f0;
+    }
+    .read {
+      background-color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>알림함</h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>편지 전송 시각</th>
+      <th>알림 보낸이</th>
+      <th>알림 받은이</th>
+      <th>편지 내용</th>
+      <th>편지 도착남은시간</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the letters and display their information -->
+    <tr th:each="alarm : ${allAlarmAndLetters}" th:class="${alarm.read} ? 'read' : 'unread'" th:data-id="${alarm.id}">
+      <td th:text="${alarm.sendDate}"></td>
+      <td th:text="${alarm.sender}"></td>
+      <td th:text="${alarm.receiver}"></td>
+      <td th:text="${alarm.message}"></td>
+      <td th:text="${alarm.alarm == 0} ? '편지도착!' : ${alarm.delayTime}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $("tr").click(function() {
+      const letterId = $(this).data("id");
+      $(this).removeClass("unread").addClass("read");
+      $.post("/letter/markAsRead", { id: letterId }, function(response) {
+        console.log("Letter marked as read:", response);
+      });
+    });
+  });
+</script>
+</body>
+</html>

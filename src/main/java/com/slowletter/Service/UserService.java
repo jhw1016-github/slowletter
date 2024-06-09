@@ -10,7 +10,7 @@ import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional
@@ -75,6 +75,15 @@ public class UserService {
 
         return optionalUser.get();
     }
+
+    public String getCountryByLoginId(String loginId){
+        Optional<UserEntity> user =userRepository.findByLoginId(loginId);
+        return user.get().getCountry();
+    }
+
+
+
+
     public UserEntity getLoginUserByLoginId(String loginId) {
         if(loginId == null) return null;
 
@@ -83,4 +92,48 @@ public class UserService {
 
         return optionalUser.get();
     }
+
+
+    public List<UserEntity> chooseRandomByCountry(String receiveLocation, String interest,String sender){
+        List<UserEntity> usersByCountry  =userRepository.findAllByCountry(receiveLocation);
+        System.out.println(usersByCountry+"sdffksjdfksjf");
+        usersByCountry.removeIf(user -> !containsInterest(user.getInterest(), interest)); //편지 보내는이가 설정한 관심사랑 겹치는게 하나도 없는 사람 제외
+        System.out.println(usersByCountry+"sdkfaaa");
+        usersByCountry.removeIf(user -> user.getLoginId().equals(sender)); //편지 보내는이는 제외한다.
+        System.out.println(usersByCountry+"dfjdkf");
+        return getRandomUsers(usersByCountry,3); //3명의 사용자를 랜덤하게 뽑는다
+    }
+    private boolean containsInterest(String userInterest, String interest) {
+        if (userInterest.contains(interest)) {
+            return true;
+        }
+        return false;
+    }
+
+    // 리스트에서 무작위 사용자 선택
+    private List<UserEntity> getRandomUsers(List<UserEntity> users, int count) {
+        List<UserEntity> randomUsers = new ArrayList<>();
+        if (users.isEmpty() || count <= 0) {
+            return randomUsers;
+        }
+
+        // 중복을 허용하지 않는 무작위 인덱스를 선택하기 위해 Set을 사용합니다.
+        Set<Integer> indexes = new HashSet<>();
+        Random random = new Random();
+
+        // 원하는 수만큼의 사용자가 선택될 때까지 반복합니다.
+        while (indexes.size() < Math.min(count, users.size())) {
+            int index = random.nextInt(users.size());
+            indexes.add(index);
+        }
+
+        // 선택된 인덱스에 해당하는 사용자를 리스트에 추가합니다.
+        for (int index : indexes) {
+            randomUsers.add(users.get(index));
+        }
+
+        return randomUsers;
+    }
+
+
 }

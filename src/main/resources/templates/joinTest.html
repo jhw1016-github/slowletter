@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      :root {
+        --muted: rgba(217, 217, 217, 1);
+        --action-sec: rgba(12, 42, 146, 1);
+        --edf-2f-7: rgba(237, 242, 247, 1);
+      }
+
+      .join {
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .join .frame {
+        display: inline-flex;
+        height: 583px;
+        align-items: flex-start;
+        gap: 10px;
+        position: relative;
+        top: 100px;
+      }
+
+      .join .group {
+        position: relative;
+        width: 419.78px;
+        height: 600px;
+        margin-bottom: -17px;
+        margin-right: -4px;
+      }
+
+      .join .text-wrapper {
+        position: relative;
+        width: fit-content;
+        margin-top: -1px;
+        font-family: "Poppins-Medium", Helvetica;
+        font-weight: 550;
+        color: #000000;
+        font-size: 32px;
+        letter-spacing: 0;
+        line-height: normal;
+      }
+
+      .join .div {
+        position: absolute;
+        width: 383px;
+        top: 55px;
+        left: 0;
+        font-family: "Poppins-Medium", Helvetica;
+        font-weight: 600;
+        color: #000000;
+        font-size: 16px;
+        letter-spacing: 0;
+        line-height: normal;
+      }
+
+      .join .IDframe {
+        display: flex;
+        flex-direction: column;
+        width: 416px;
+        height: 70px;
+        align-items: flex-start;
+        position: absolute;
+        top: 120px;
+        left: 0;
+      }
+
+      .join .name-wrapper {
+        display: inline-flex;
+        align-items: flex-start;
+        gap: 10px;
+        position: relative;
+        flex: 0 0 auto;
+      }
+
+      .join .name {
+        position: relative;
+        width: fit-content;
+        margin-top: -1px;
+        font-family: "Poppins-Medium", Helvetica;
+        font-weight: 500;
+        color: #000000;
+        font-size: 14px;
+        letter-spacing: 0;
+        line-height: normal;
+      }
+
+      .join .frame-3 {
+        display: flex;
+        width: 404px;
+        height: 32px;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0px 10px 10px;
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid;
+        border-color: #d9d9d9;
+      }
+
+      .join .input {
+        display: inline-flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 10px;
+        position: relative;
+        flex: 0 0 auto;
+        margin-top: -1px;
+        margin-bottom: -1.5px;
+        border: none;
+        background: none;
+        font-family: "Poppins-Medium", Helvetica;
+        font-weight: 500;
+        font-size: 15px;
+        letter-spacing: 0;
+        line-height: normal;
+        padding: 0;
+      }
+
+      .join .pwframe {
+        position: absolute;
+        width: 416px;
+        height: 60px;
+        top: 210px;
+        left: 0;
+      }
+
+      .join .pwcheck {
+        position: absolute;
+        width: 416px;
+        height: 60px;
+        top: 310px;
+        left: 0;
+      }
+
+      .join .nickname {
+        position: absolute;
+        width: 416px;
+        height: 60px;
+        top: 410px;
+        left: 0;
+      }
+
+      .join .country {
+        position: absolute;
+        width: 416px;
+        height: 60px;
+        top: 510px;
+        left: 0;
+      }
+      .join .inter {
+        position: absolute;
+        top: 560px;
+        left: 0;
+      }
+      .join .interest {
+        position: absolute;
+        width: 416px;
+        height: 60px;
+        top: 590px;
+        left: 0;
+      }
+
+      .join .gender {
+        position: absolute;
+        width: 416px;
+        height: 60px;
+        top: 660px;
+        left: 0;
+      }
+
+      .join .gendercheck {
+        position: absolute;
+        width: 416px;
+        height: 60px;
+        top: 690px;
+        left: 0;
+      }
+
+      .join .text-wrapper-2 {
+        position: relative;
+        width: fit-content;
+        margin-top: -1px;
+        font-family: "Poppins-Medium", Helvetica;
+        font-weight: 500;
+        color: var(--muted);
+        font-size: 10px;
+        letter-spacing: 0;
+        line-height: normal;
+      }
+
+      .join .text-wrapper-3 {
+        position: absolute;
+        width: 85px;
+        top: 0;
+        left: 350px;
+        font-family: "Poppins-Medium", Helvetica;
+        font-weight: 500;
+        color: var(--action-sec);
+        font-size: 10px;
+        letter-spacing: 0;
+        line-height: normal;
+      }
+
+      .join .group-3 {
+        position: absolute;
+        width: 238px;
+        height: 24px;
+        top: 576px;
+        left: 96px;
+      }
+
+      .join .p {
+        position: absolute;
+        width: 236px;
+        top: 0;
+        left: 0;
+        font-family: "Poppins-Medium", Helvetica;
+        font-weight: 500;
+        color: #000000;
+        font-size: 14px;
+        letter-spacing: 0;
+        line-height: normal;
+      }
+
+      .join .span {
+        font-family: "Poppins-Medium", Helvetica;
+        font-weight: 500;
+        color: #000000;
+        font-size: 14px;
+        letter-spacing: 0;
+      }
+
+      .join .text-wrapper-5 {
+        text-decoration: underline;
+      }
+
+      .join .joinbutton {
+        position: absolute;
+        width: 416px;
+        height: 36px;
+        top: 690px;
+        left: 0;
+      }
+
+      .join .overlap-group {
+        position: relative;
+        width: 404px;
+        height: 32px;
+      }
+
+      .join .frame-6 {
+        width: 404px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .join .frame-7 {
+        display: flex;
+        width: 404px;
+        height: 32px;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0px 10px 10px;
+        position: relative;
+        background-color: #ffc7c7;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid;
+      }
+
+      .join .text-wrapper-6 {
+        position: absolute;
+        top: 17px;
+        left: 163px;
+        font-family: "Poppins-Bold", Helvetica;
+        font-weight: 700;
+        color: #000000;
+        font-size: 13px;
+        letter-spacing: 0;
+        line-height: normal;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="join">
+      <div class="frame-wrapper">
+        <div class="frame">
+          <div class="group">
+            <div class="text-wrapper">회원가입</div>
+            <p class="div">가입을 환영합니다.</p>
+            <!-- 여기서부터 회원가입 입력부분 -->
+            <form
+              th:method="post"
+              th:action="|@{/session-login/join}|"
+              th:object="${joinRequest}"
+            >
+              <div class="IDframe">
+                <div class="name-wrapper"><div class="name">아이디</div></div>
+                <div class="frame-3">
+                  <label th:for="loginId"></label>
+                  <input
+                    class="input"
+                    type="text"
+                    th:field="*{loginId}"
+                    th:errorclass="error-input"
+                    placeholder="아이디를 입력하세요."
+                  />
+                  <div class="error-class" th:errors="*{loginId}"></div>
+                </div>
+              </div>
+              <div class="pwframe">
+                <div class="name-wrapper"><div class="name">비밀번호</div></div>
+                <div class="frame-3">
+                  <label th:for="password"></label>
+                  <input
+                    class="input"
+                    type="password"
+                    th:field="*{password}"
+                    th:errorclass="error-input"
+                    placeholder="비밀번호를 입력하세요."
+                  />
+                  <div class="error-class" th:errors="*{password}"></div>
+                </div>
+              </div>
+              <div class="pwcheck">
+                <div class="name-wrapper">
+                  <div class="name">비밀번호 체크</div>
+                </div>
+                <div class="frame-3">
+                  <label th:for="passwordCheck"></label>
+                  <input
+                    class="input"
+                    type="password"
+                    th:field="*{passwordCheck}"
+                    th:errorclass="error-input"
+                    placeholder="비밀번호 체크"
+                  />
+                  <div class="error-class" th:errors="*{passwordCheck}"></div>
+                </div>
+              </div>
+              <div class="nickname">
+                <div class="name-wrapper"><div class="name">닉네임</div></div>
+                <div class="frame-3">
+                  <label th:for="nickname"></label>
+                  <input
+                    class="input"
+                    type="text"
+                    th:field="*{nickname}"
+                    th:errorclass="error-input"
+                    placeholder="닉네임을 입력하세요."
+                  />
+                  <div class="error-class" th:errors="*{nickname}"></div>
+                </div>
+              </div>
+              <div class="country">
+                <label th:for="countrySelect">거주지 : </label>
+                <select name="country" id="countrySelect">
+                  <option value="아시아">아시아</option>
+                  <option value="유럽">유럽</option>
+                  <option value="북아메리카">북아메리카</option>
+                  <option value="남아메리카">남아메리카</option>
+                  <option value="아프리카">아프리카</option>
+                  <option value="오세아니아">오세아니아</option>
+                  <option value="가나">가나</option>
+                  <option value="그리스">그리스</option>
+                  <option value="네팔">네팔</option>
+                  <option value="노르웨이">노르웨이</option>
+                  <option value="대한민국">대한민국</option>
+                  <option value="독일">독일</option>
+                  <option value="러시아">러시아</option>
+                  <option value="라오스">라오스</option>
+                  <option value="멕시코">멕시코</option>
+                  <option value="미국">미국</option>
+                  <option value="베트남">베트남</option>
+                  <option value="벨기에">벨기에</option>
+                  <option value="브라질">브라질</option>
+                  <option value="스위스">스위스</option>
+                  <option value="스페인">스페인</option>
+                  <option value="영국">영국</option>
+                  <option value="이탈리아">이탈리아</option>
+                  <option value="일본">일본</option>
+                  <option value="인도">인도</option>
+                  <option value="중국">중국</option>
+                  <option value="프랑스">프랑스</option>
+                </select>
+              </div>
+              <div class="inter">관심사</div>
+              <div class="interest">
+                <label th:for="interest"></label>
+                음식<input type="checkbox" name="interest" value="음식" />
+                음악<input type="checkbox" name="interest" value="음악" />
+                문화<input type="checkbox" name="interest" value="문화" />
+                건축물<input type="checkbox" name="interest" value="건축물" />
+                사진<input type="checkbox" name="interest" value="사진" />
+                게임<input type="checkbox" name="interest" value="게임" />
+                패션<input type="checkbox" name="interest" value="패션" />
+                자동차<input type="checkbox" name="interest" value="자동차" />
+                그냥 떠들기<input
+                  type="checkbox"
+                  name="interest"
+                  value="그냥 떠들기"
+                />
+              </div>
+              <div class="joinbutton">
+                <div class="overlap-group">
+                  <div class="frame-6">
+                    <div class="frame-7"></div>
+                  </div>
+                  <div class="text-wrapper-6">
+                    <button type="submit" class="input">회원 가입하기</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
